@@ -8,12 +8,12 @@ public class Inventory {
 
     }
 
-    public void addToInvetory(Item item) {
+    public void addToInvetory(Purpose item) {
         // increase purpose count
 
     }
 
-    public void removeFromInvetory(Item item) {
+    public void removeFromInvetory(Purpose item) {
 
     }
 
