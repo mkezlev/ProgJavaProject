@@ -1,8 +1,8 @@
 import java.util.HashMap;
 
 public class Inventory {
-    private Purpose bag[];
-    private HashMap <Purpose, Integer> inventory;
+    
+    private HashMap <Purpose, Integer> bag;
 
     public Inventory(Purpose item) {
 
