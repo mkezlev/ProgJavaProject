@@ -13,4 +13,5 @@ public class Main {
         IO.println(map.get(Purpose.DECREASE));
         }
     }
+    //commit for testing in gitHub
 }
