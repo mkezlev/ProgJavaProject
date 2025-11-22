@@ -30,4 +30,7 @@ public class Main {
         map.replace(Purpose.AVOID,10);
         IO.println(map.get(Purpose.AVOID));
         IO.println(map.get(Purpose.DECREASE));
-        */
+        }
+    }
+    //commit for testing in gitHub
+}
