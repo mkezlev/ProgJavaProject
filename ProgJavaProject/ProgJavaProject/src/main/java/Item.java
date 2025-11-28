@@ -1,5 +1,5 @@
 public class Item {
-
+    GlobSettings globSet = new GlobSettings();
     private String name;
     private Purpose purpose;
     private Location location;
@@ -22,8 +22,8 @@ public class Item {
         return this.location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void placeItem(Location loc) {
+                this.location = loc;
     }
 
 }
