@@ -1,0 +1,82 @@
+package game;/*
+Class Obstacle
+Class attributes
+  Location
+  Size
+
+Class Methods
+    Constructor @Param location @Param size
+ */
+
+public class Obstacle {
+    GlobSettings globSet = new GlobSettings();
+    Location location;
+    int size = globSet.OBS_INITIAL_SIZE;
+
+
+
+
+    public Obstacle () {
+        this.location = new Location();
+        this.size = size;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    public int getSize() {
+        return size;
+    }
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public void increaseSize(int increment) {
+        size +=increment;
+    }
+
+    public void decreaseSize(int decrement) {
+        size -=decrement;
+    }
+
+    /*
+       Place obstacle in game space where it does not contain
+       the given location. So that the player location is not
+       in the space covered by the obstacle
+       @Param loc
+       #Return True if obstacle can be place in the game space
+       #Retrun False if obstacle cannot be place in the game space
+         Size of obstacle is equal or bigger than gamespace
+     */
+    public boolean placeObstacle(Location loc){
+        if (globSet.SPACE_SIZE-size <= 0) return false;
+        this.location.newLocation(globSet.SPACE_SIZE-size);
+        while(!hitObstacle(loc)) this.location.newLocation(globSet.SPACE_SIZE-size);
+        return true;
+    }
+
+    public void obsLocation(){
+        IO.println(location.getX() + " " + location.getY());
+    }
+
+    /*
+    this method check if the give location is in the area cover by the obstacle
+    @Param location
+    #Return True if given location is in teh area of obstacle covering
+     */
+    public boolean hitObstacle(Location location) {
+
+        // check if locX is in range of obstacle x range
+        if  ( this.location.getX() <= location.getX() && location.getX() <= this.location.getX() + this.size )
+          return true;
+        if (this.location.getY() <= location.getY() && location.getY() <= this.location.getY() + this.size )
+            return true;
+        return false;
+    }
+
+
+
+}
