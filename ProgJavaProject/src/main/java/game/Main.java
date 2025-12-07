@@ -5,6 +5,21 @@ package game;
 public class Main {
     static void main() {
 
+
+        Location loc = new Location();
+        UserInput userInput = new UserInput();
+        Player player = new Player(loc);
+        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+        player.move("N",102);
+        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+        player.move("S",102);
+        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+        player.move("E",102);
+        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+        player.move("W",102);
+        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+
+
 //        Location loc = new Location();
 //        Location loc2 = new Location();
 //        loc.newLocation(100);
@@ -17,15 +32,17 @@ public class Main {
 //            IO.println("location " + loc.getX() + " " + loc.getY());
 //            obs.obsLocation();
 //            obs.increaseSize(5);
-//        }
+//
 
-    UserInput userInput = new UserInput();
+
+/*
+
 
     IO.println("Welcome to input Test");
     IO.println(userInput.lengthConstrainedInputString("Enter Direction : E,W,N,S", "Enter one char only",1));
     IO.println(userInput.constrainedInputInteger("Enter Steps","Numbers only",0,100));
 
-
+ */
         /*
         *** Test for location and obstacle
 
