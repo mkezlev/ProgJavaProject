@@ -5,6 +5,20 @@ package game;
 public class Main {
     static void main() {
 
+//        Location loc = new Location();
+//        Location loc2 = new Location();
+//        loc.newLocation(100);
+//
+//
+//        Obstacle obs = new Obstacle();
+//        while (obs.placeObstacle(loc))
+//        {
+//            loc.newLocation(100);
+//            IO.println("location " + loc.getX() + " " + loc.getY());
+//            obs.obsLocation();
+//            obs.increaseSize(5);
+//        }
+
     UserInput userInput = new UserInput();
 
     IO.println("Welcome to input Test");
