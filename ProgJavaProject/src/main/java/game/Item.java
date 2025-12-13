@@ -20,6 +20,7 @@ public class Item {
         this.purpose = purpose;
     }
 
+    public void setLocation(Location location) {this.location = location;} // added set location Murat
     public Location getLocation() {
         return this.location;
     }
