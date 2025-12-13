@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+
+// Class Inventory
+// Holds the items player posses
 public class Inventory {
     
     private HashMap <Purpose, List<Item>> bag;

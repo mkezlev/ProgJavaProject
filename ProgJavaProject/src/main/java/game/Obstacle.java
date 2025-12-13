@@ -1,4 +1,7 @@
-package game;/*
+package game;
+
+
+/*
 Class Obstacle
 Class attributes
   Location
@@ -6,6 +9,15 @@ Class attributes
 
 Class Methods
     Constructor @Param location @Param size
+    getLocation
+    setLocation
+    getSize
+    setSize
+    increaseSize
+    decreaseSize
+    placeObstacle
+    obcLocation
+    hitObstacle
  */
 
 public class Obstacle {
@@ -21,12 +33,14 @@ public class Obstacle {
         this.size = size;
     }
 
+    // getter and setter for location attribute
     public Location getLocation() {
         return location;
     }
     public void setLocation(Location location) {
         this.location = location;
     }
+    // getter and setter for size attribute
     public int getSize() {
         return size;
     }
@@ -34,10 +48,15 @@ public class Obstacle {
         this.size = size;
     }
 
+    // method increase size
+    // @Param increment
+    // change obstacle size by +increment
     public void increaseSize(int increment) {
         size +=increment;
     }
-
+    // method decrease size
+    // @Param decrement
+    // change obstacle size by +decrement
     public void decreaseSize(int decrement) {
         size -=decrement;
     }

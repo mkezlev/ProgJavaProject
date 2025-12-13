@@ -1,7 +1,8 @@
 package game;
 
 import java.util.Random;
-
+// class Location
+// holds X,Y values for location
 public class Location {
     private int x;
     private int y;
@@ -10,21 +11,14 @@ public class Location {
     public Location() {
     }
 
-    public void setX(int x){
-        this.x = x;
-    }
 
-    public void setY(int y){
-        this.y = y;
-    }
+    // getter and setter for x attribute
+    public int getX(){ return this.x; }
+    public void setX(int x){this.x = x; }
 
-    public int getX(){
-        return this.x;
-    }
-
-    public int getY(){
-        return this.y;
-    }
+    // getter and setter for y attribute
+    public void setY(int y){ this.y = y;    }
+    public int getY(){ return this.y; }
 
 
     // set new location x,y values
@@ -51,7 +45,7 @@ public class Location {
         return this;
     }
 
-    // generate random interger number in range 0-space
+    // generate random integer number in range 0-space
     private int getRandomNumber(int space) {
         Random rand = new Random();
         int randomNumber = rand.nextInt(space+1);

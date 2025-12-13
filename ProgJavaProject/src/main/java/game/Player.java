@@ -1,5 +1,6 @@
 package game;
-
+// class Player
+//
 public class Player {
     GlobSettings globSet = new GlobSettings();
     Location location;

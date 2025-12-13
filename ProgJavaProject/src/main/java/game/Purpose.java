@@ -1,5 +1,5 @@
 package game;
-
+// enum class for different purposes
 public enum Purpose {
     AVOID,DECREASE,NO_AFFECT
 /*
