@@ -10,7 +10,6 @@ public class Game {
     Item item = new Item("Test1", Purpose.AVOID);
 
 
-
     public Game() {
 
     }
@@ -19,14 +18,22 @@ public class Game {
         player.location.newLocation(gameSpace);
     }
 
-    // if oostacle can be placed in the game space return TRUE
+    // if obstacle can be placed in the game space return TRUE
     // if not return FALSE
     public boolean setObstacleLocation(){
         return obstacle.placeObstacle(player.location);
     }
 
-    // pick an item from the items randomly
-    public Item pickItemToCollect() {
+
+    /*
+    ********************!!!!!!!! pick an item from the itemList randomly
+     */
+
+    public Item pickItemForUserToCollect() {
+        // compelete the code to pick item from available item list
+        // index = random (0-10)
+        // itempicked = itemArray(index)
+        // retun itempicked
         return null;
     }
 
@@ -45,12 +52,21 @@ public class Game {
         item.placeItem(loc);
     } // end setItemLocation
 
-    // display player the task
-    public void displayTask(){
 
+    /*
+    ******************!!!!! display player the task
+
+     */
+
+    public void displayTask(){
+       // develop the code
     } // end displayTask
 
+    /*
+    ******************!!!!!
+    */
     public boolean getDirection(){
+        // develop the code
         return false;
     } // end getDirection
 
@@ -59,11 +75,11 @@ public class Game {
         setPlayerLocation();
 
         // set obstacle location
-        // while obstacle can be placed in the game space continue
+        // while obstacle can be placed in the game space
         if (setObstacleLocation()) {
             Item itemToCollect;
             // pick random item to pick by player
-            item = pickItemToCollect();
+            item = pickItemForUserToCollect();
             // set item location
             setItemLocation(item);
             return true;
@@ -80,11 +96,17 @@ public class Game {
             //      - item and item location
             displayTask();
 
+            // if bag is not empty ask user if user wants to use power
+
             // get player command until player hits obstacle
             // or reach item
             while (getDirection()) {
-
+                // get the direction
+                // check the final place
+                // if it is in obstacle end game
+                // if same place as item leave loop
             }
+
 
             // ask player action on item
             // user power or collect

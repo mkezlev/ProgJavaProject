@@ -6,6 +6,7 @@ public class Main {
     static void main() {
 
 
+
         Location loc = new Location();
         UserInput userInput = new UserInput();
         Player player = new Player(loc);

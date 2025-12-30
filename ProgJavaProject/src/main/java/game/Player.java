@@ -17,6 +17,8 @@ public class Player {
         this.location.setX(x);
         this.location.setY(y);}
 
+
+
     public Inventory getInventory() { return inventory; }
     public void setInventory(Inventory inventory) { this.inventory = inventory; }
 
@@ -67,7 +69,7 @@ public class Player {
         System.out.println("Picked item: " + item.getName());
     }
 
-    public void dropItem(Item item) {
+    public void useItem(Item item) {
         if (inventory != null) {
             inventory.removeFromInvetory(item);
             System.out.println("Dropped item: " + item.getName());

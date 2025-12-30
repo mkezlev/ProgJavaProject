@@ -7,7 +7,6 @@ public class Location {
     private int x;
     private int y;
 
-
     public Location() {
     }
 
@@ -21,16 +20,24 @@ public class Location {
     public int getY(){ return this.y; }
 
 
-    // set new location x,y values
+    /*
+       set new location x,y values
+       @Param Size
+     */
+
     public Location newLocation(int size){
         this.x = getRandomNumber(size);
         this.y = getRandomNumber(size);
         return this;
-
     }
 
-   // set new location x,y values  
-   // location method overload to ensure new location is different than given location
+
+    /*
+       set new location x,y values
+       location method overload to ensure new location is different than given location
+       @Param size
+       @Param loc
+     */
     public Location newLocation(int size, Location loc){
         this.x = getRandomNumber(size);
         int locx=loc.getX();
@@ -52,4 +59,4 @@ public class Location {
         return randomNumber;
     }
 
-}
+} // end Class Location
