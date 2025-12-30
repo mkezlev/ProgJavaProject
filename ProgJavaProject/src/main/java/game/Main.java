@@ -3,22 +3,20 @@ package game;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    static void main() {
+    public static void main(String[] args) {
 
-
-
-        Location loc = new Location();
-        UserInput userInput = new UserInput();
-        Player player = new Player(loc);
-        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
-        player.move("N",102);
-        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
-        player.move("S",102);
-        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
-        player.move("E",102);
-        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
-        player.move("W",102);
-        IO.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+//        Location loc = new Location();
+//        UserInput userInput = new UserInput();
+//        Player player = new Player(loc);
+//        System.out.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+//        player.move("N",102);
+//        System.out.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+//        player.move("S",102);
+//        System.out.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+//        player.move("E",102);
+//        System.out.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
+//        player.move("W",102);
+//        System.out.println("player x: " + player.getLocation().getX()+" Player y: " + player.getLocation().getY());
 
 
 //        Location loc = new Location();
@@ -65,15 +63,6 @@ public class Main {
 
 
 
-
-
-
-    }
-
-
-}
-
-
         /*
         HashMap<Purpose, Integer> map = new HashMap<>();
         IO.println(map.isEmpty());
@@ -85,3 +74,5 @@ public class Main {
         IO.println(map.get(Purpose.AVOID));
         IO.println(map.get(Purpose.DECREASE));
         */
+    }
+}
