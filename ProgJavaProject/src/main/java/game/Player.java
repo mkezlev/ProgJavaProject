@@ -6,20 +6,34 @@ public class Player {
     Location location;
     Inventory inventory;
 
-    public Player() {  }
+    public Player() {
+        this.location = new Location();
+        this.inventory = new Inventory();
+    }
+
     public Player(Location location) {
-        this.location = location;
+        if (location != null) {
+            this.location = location;
+        } else {
+            this.location = new Location();
+        }
+        this.inventory = new Inventory();
     }
 
     public Location getLocation() { return location; }
+
     public void setLocation(Location location) { this.location = location; }
+
     public void setLocation(int x, int y) {
-        this.location.setX(x);
-        this.location.setY(y);}
+        int gameSpace = globSet.SPACE_SIZE;
 
-
+        // If the location > gameSpace, take gameSpace; Else if location<0, take 0; Else take X or Y
+        this.location.setX(x>gameSpace?gameSpace:(x < 0 ? 0 : x));
+        this.location.setY(y>gameSpace?gameSpace:(y < 0 ? 0 : y));
+    }
 
     public Inventory getInventory() { return inventory; }
+
     public void setInventory(Inventory inventory) { this.inventory = inventory; }
 
     public void move(String direction, int steps) {
@@ -29,50 +43,36 @@ public class Player {
 
         int gameSpace = globSet.SPACE_SIZE;
 
-        /// Move based on the direction
+        // Move logic
         if (dir.equals("N")) {
-            //y -= steps;
             y+= steps;
-        } else if (dir.equals("S")) {
-            //y += steps;
+        }
+        else if (dir.equals("S")) {
             y -= steps;
-        } else if (dir.equals("W")) {
+        }
+        else if (dir.equals("W")) {
             x -= steps;
-        } else if (dir.equals("E")) {
+        }
+        else if (dir.equals("E")) {
            x += steps;
-        } else {
+        }
+        else {
             System.out.println("Invalid direction!");
             return;
         }
 
-        // Make sure the new location is within the range of map, namely[0,99]
-
-        y = (y>gameSpace ? gameSpace : y);
-        y = (y<0 ? 0 : y);
-        x = (x>gameSpace ? gameSpace : x);
-        x = (x<0 ? 0 : x);
-       /* or this code
-        x = Math.max(0, x);
-        x = Math.min(gameSpace, x);
-        y = Math.max(0, y);
-        y = Math.min(gameSpace, y);
-        */
-        this.location.setX(x);
-        this.location.setY(y);
+        // Make sure the new location is within the range of map, namely[0,100]
+        this.setLocation(x, y);
     } // end move
 
     public void pickItem(Item item) {
-        if (inventory == null) {
-            inventory = new Inventory();
-        }
-        inventory.addToInvetory(item);
+        inventory.addToInventory(item);
         System.out.println("Picked item: " + item.getName());
     }
 
     public void useItem(Item item) {
         if (inventory != null) {
-            inventory.removeFromInvetory(item);
-            System.out.println("Dropped item: " + item.getName());
+            inventory.removeFromInventory(item);
         }
         else  {
             System.out.println("Inventory is empty!");
