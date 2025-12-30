@@ -1,6 +1,5 @@
 package game;
 
-
 /*
 Class Obstacle
 Class attributes
@@ -48,15 +47,19 @@ public class Obstacle {
         this.size = size;
     }
 
-    // method increase size
-    // @Param increment
-    // change obstacle size by +increment
+    /** method increase size
+     @Param increment
+     change obstacle size by +increment
+     */
     public void increaseSize(int increment) {
         size +=increment;
     }
-    // method decrease size
-    // @Param decrement
-    // change obstacle size by +decrement
+
+    /* method decrease size
+     @Param decrement
+     change obstacle size by -decrement
+     */
+
     public void decreaseSize(int decrement) {
         size -=decrement;
     }
@@ -68,7 +71,7 @@ public class Obstacle {
        @Param loc
        #Return True if obstacle can be place in the game space
        #Retrun False if obstacle cannot be place in the game space
-         Size of obstacle is equal or bigger than gamespace
+               in case size of obstacle is equal or bigger than gamespace
      */
     public boolean placeObstacle(Location loc){
         if (globSet.SPACE_SIZE-size <= 0) return false;
@@ -77,25 +80,26 @@ public class Obstacle {
         return true;
     }
 
+    // print obstacle location
     public void obsLocation(){
-        IO.println(location.getX() + " " + location.getY());
+        System.out.println(location.getX() + " " + location.getY());
     }
 
     /*
-    this method check if the give location is in the area cover by the obstacle
+    this method check if the give location is in the area covered by the obstacle
     @Param location
-    #Return True if given location is in teh area of obstacle covering
+    #Return True if given location is in the area of obstacle covering
      */
     public boolean hitObstacle(Location location) {
 
         // check if locX is in range of obstacle x range
         if  ( this.location.getX() <= location.getX() && location.getX() <= this.location.getX() + this.size )
           return true;
+        // check if locY is in range of obstacle x range
         if (this.location.getY() <= location.getY() && location.getY() <= this.location.getY() + this.size )
             return true;
         return false;
-    }
+    } // end method hitObstacle
 
 
-
-}
+} // end Class Obstacle
