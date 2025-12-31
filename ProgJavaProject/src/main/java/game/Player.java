@@ -70,15 +70,14 @@ public class Player {
 
     public void pickItem(Item item) {
         inventory.addToInventory(item);
-        System.out.println("Picked item: " + item.getName());
     }
 
     public void useItem(Item item) {
-        if (inventory != null) {
+        if (inventory != null&& item != null) {
             inventory.removeFromInventory(item);
         }
         else  {
-            System.out.println("Inventory is empty!");
+            System.out.println("Inventory is empty or item is invalid.");
         }
     }
 }

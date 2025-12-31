@@ -38,10 +38,10 @@ public class UserInput {
     }
 
     /** Ask String at required length input from user
-    @Param userInfo : The message to the user
-    @Param errorInfo: Message when the input is wrong
-    @length: Max number characters user can provide
-    #return user input
+    * @param userInfo The message to the user
+    * @param errorInfo Message when the input is wrong
+    * @param length Max number characters user can provide
+    * @return user input
     */
 
     public String lengthConstrainedInputString (String userInfo, String errorInfo, int length)
@@ -55,11 +55,12 @@ public class UserInput {
         return userInput;
     }
 
-    /* Ask integer input from user
-@Param userInfo : The message to the user
-@Param errorInfo: Message when the input is wrong
-#return user input
-*/
+    /**
+     * Ask integer input from user
+     * @param userInfo The message to the user
+     * @param errorInfo Message when the input is wrong
+     * @return user input
+     */
     public int inputInteger (String userInfo, String errorInfo){
         boolean isInteger = false;
         int userInput=0;
