@@ -24,7 +24,7 @@ public class Game {
         };
     }
 
-    public void displatGameObjective(){
+    public void displayGameObjective(){
         System.out.println("Game Objective is to navigate to the coordinates the item is placed and collect the item");
         System.out.println("There is a square obstacle on the game board which user must not hit");
         System.out.println("The square obstacle size increase after each successful task");
@@ -189,8 +189,9 @@ public class Game {
         String direction="";
         int steps = 0;
         Comparable itemLoc;
-        Item itemToCollect = setTask();
         Item itemToUse;
+        Item itemToCollect = setTask();
+        displayGameObjective();
         while (itemToCollect !=null && !fallInObstacle) {
             // display to player the new task
             displayTask(itemToCollect);
