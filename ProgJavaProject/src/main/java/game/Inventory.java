@@ -49,18 +49,33 @@ public class Inventory {
     }
 
     /**
-     * Displays a list of all items currently in the inventory
+     * Displays a list with index of all items currently in the inventory
      */
     public void listInventory() {
-        System.out.println("Inventory:");
-        for (Purpose purpose : bag.keySet()) {
+        System.out.println("Current Inventory:");
+        int count = 1;
+        for (Purpose purpose : Purpose.values()) {
             List<Item> items = bag.get(purpose);
             if (!items.isEmpty()) {
-                System.out.println(purpose + ": " + items.size() + " items"); // list quantity of the item
+                System.out.println("[" + purpose + "]");
                 for (Item item : items) {
-                    System.out.println(" - " + item.getName()); //list name of the item
+                    System.out.println(count + ". " + item.getName());
+                    count++;
                 }
             }
         }
     } // end listInventory
+
+    /**
+     * Extract all items of all purposes in the inventory and gather them into one single Arraylist
+     * @return A {@link List} containing all {@link Item}.
+     */
+    public List<Item> getAllItemsAsList() {
+        List<Item> allItems = new ArrayList<>();
+
+        for (Purpose purpose : Purpose.values()) {
+            allItems.addAll(bag.get(purpose));
+        }
+        return allItems;
+    }
 }

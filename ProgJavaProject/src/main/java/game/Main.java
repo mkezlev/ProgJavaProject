@@ -74,5 +74,6 @@ public class Main {
         IO.println(map.get(Purpose.AVOID));
         IO.println(map.get(Purpose.DECREASE));
         */
+
     }
 }

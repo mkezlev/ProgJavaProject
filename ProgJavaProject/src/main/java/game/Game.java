@@ -1,7 +1,11 @@
 package game;
 
+import java.util.List;
 import java.util.Random;
 
+/**
+ * Manages game logic, player actions, obstacles, and item collection tasks.
+ */
 public class Game {
 
     Player player;
@@ -9,7 +13,7 @@ public class Game {
     Obstacle obstacle;
     int gameSpace = GlobSettings.SPACE_SIZE; // size of area 10x10, 100x10
 
-
+    // Constructor
     public Game() {
         this.player = new Player(new Location());
         this.obstacle = new Obstacle();
@@ -24,6 +28,9 @@ public class Game {
         };
     }
 
+    /**
+     * Displays game rules, objectives, and available items.
+     */
     public void displayGameObjective(){
         System.out.println("Game Objective is to navigate to the coordinates the item is placed and collect the item");
         System.out.println("There is a square obstacle on the game board which user must not hit");
@@ -32,23 +39,23 @@ public class Game {
         System.out.printf("The player enter the direction and steps (0-%d) to move on the game board of size %dx%d\n", GlobSettings.SPACE_SIZE,GlobSettings.SPACE_SIZE,GlobSettings.SPACE_SIZE);
         System.out.println("The player can use power of the collect item to hide the obstacle or decrease the size of obstacle");
         System.out.println("The user will collect one of the items:");
-        for (int i = 0; i <= items.length; i++) {
+        for (int i = 0; i <items.length; i++) {
             System.out.printf("Item name %s with power %s\n",items[i].getName(),items[i].getPurpose().toString());
         }
 
     }
 
-    /*
-    place obstacle in game space
-    if obstacle can be placed in the game space return TRUE
-    if not return FALSE
+    /**
+     * place obstacle in game space
+     * @return TRUE if obstacle can be placed in the game space
+     * if not, FALSE
      */
     public boolean setObstacleLocation(){
         return obstacle.placeObstacle();
     }
 
-    /*
-     *   place player in the game space
+    /**
+     *  place player in the game space
      *  in a coordinate outside obstacle
      */
     public void setPlayerLocation(){
@@ -62,7 +69,7 @@ public class Game {
 
     /**
      * Randomly picks one item from the item pool as the current game objective.
-     * @return A randomly selected {@link Item}, or {@code null} if the pool is empty.
+     * @return A randomly selected {@link Item}.
      */
     public Item getItemForUserToCollect() {
         Random random = new Random();
@@ -77,9 +84,9 @@ public class Game {
         return itemPicked;
     }
 
-    /*
+    /**
     * Place selected item in the game space
-    * in a coordinate different than player and outside obstacle
+    * in a coordinate different from player and outside obstacle
      */
     public void setItemLocation(Item item){
         Location loc = new Location();
@@ -87,7 +94,7 @@ public class Game {
         Comparable cLoc = (Comparable)loc;
         Comparable playerLoc = (Comparable)player.location;
 
-        // place item in a coordinate different than player
+        // place item in a coordinate different from player
         // and outside obstacle
         while(cLoc.compareTo(playerLoc) == 0 || obstacle.hitObstacle(loc)){
             loc.newLocation(gameSpace);
@@ -97,11 +104,11 @@ public class Game {
     } // end setItemLocation
 
 
-    /*
-     * display player the task
-     *  item to collect and X-Y coordinates of the item
+    /**
+     *  display player the task to collect and X-Y coordinates of the item,
      *  Player X-Y location
-     *  Area player must  avoid for not hitting the obstacle
+     *  Area that player must avoid for not hitting the obstacle
+     *  @param item
      */
     public void displayTask(Item item){
         int obsX = obstacle.getLocation().getX();
@@ -115,9 +122,9 @@ public class Game {
 
     } // end displayTask
 
-    /*
-    * get direction to move
-    * return direction
+    /**
+    * Get direction to move
+    * @return direction
     */
     public String getDirection(){
         UserInput input = new UserInput();
@@ -136,9 +143,9 @@ public class Game {
         return direction;
     } // end getDirection
 
-    /*
-     * get steps to move
-     * return steps
+    /**
+     * Get steps to move
+     * @return steps
      */
     private int getSteps(){
         UserInput input = new UserInput();
@@ -147,25 +154,40 @@ public class Game {
         return steps;
     }
 
-    /*
-    * ask user which item player wants to use from the player inventory
-    * remove the item from user inventory
-    * return the item
+    /**
+    * Ask user which item player wants to use from the player inventory
+    * and remove that item from user inventory
+    * @return The selected {@link Item}
     */
-    private Item getItemFromPlayerInventory(){
-        Item item;
-        player.getInventory().listInventory();
-        // develop the code to select the item
-        item = null;
-        player.useItem(item);
-        return item;
+    public Item getItemFromPlayerInventory(){
+        List<Item> allItems = player.getInventory().getAllItemsAsList();
+
+        if (allItems.isEmpty()) {
+            System.out.println("Your inventory is empty!");
+            return null;
+        }
+
+        System.out.println("Inventory:");
+        for (int i = 0; i < allItems.size(); i++) {
+            System.out.println("[" + (i + 1) + "] " + allItems.get(i).getName());
+        }
+
+        UserInput input = new UserInput();
+        int choice = input.constrainedInputInteger(
+                "Enter the number of the item (1-" + allItems.size() + "): ",
+                "Invalid selection",
+                0, allItems.size()+1);
+
+        Item selectedItem = allItems.get(choice - 1);
+        player.getInventory().removeFromInventory(selectedItem);
+
+        return selectedItem;
     }
 
 
-    /*
-    * set task
-    * if task can be set return item to collect
-    * if task cannot be set return null
+    /**
+    * Set task
+    * @return The new target {@link Item} or null if no task can be set.
      */
     public Item setTask() {
         // set obstacle location if obstacle can be placed in the game space
@@ -182,6 +204,10 @@ public class Game {
 
     } // end set task
 
+    /**
+     * Start the main game loop, handling user turns, item usage,
+     * movement, and collision detection.
+     */
     public void playGame() {
         boolean canWalkOverObstacle = false;
         boolean onItemLocation = false;
