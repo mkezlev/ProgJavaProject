@@ -169,7 +169,7 @@ public class Game {
 
         System.out.println("Inventory:");
         for (int i = 0; i < allItems.size(); i++) {
-            System.out.println("[" + (i + 1) + "] " + allItems.get(i).getName());
+            System.out.printf("[" + (i + 1) + "] %s with power %s \n",allItems.get(i).getName(),allItems.get(i).getPurpose().toString());
         }
 
         UserInput input = new UserInput();
