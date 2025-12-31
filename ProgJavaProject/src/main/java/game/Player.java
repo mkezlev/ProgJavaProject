@@ -2,7 +2,7 @@ package game;
 // class Player
 //
 public class Player {
-    GlobSettings globSet = new GlobSettings();
+
     Location location;
     Inventory inventory;
 
@@ -25,7 +25,7 @@ public class Player {
     public void setLocation(Location location) { this.location = location; }
 
     public void setLocation(int x, int y) {
-        int gameSpace = globSet.SPACE_SIZE;
+        int gameSpace = GlobSettings.SPACE_SIZE;
 
         // If the location > gameSpace, take gameSpace; Else if location<0, take 0; Else take X or Y
         this.location.setX(x>gameSpace?gameSpace:(x < 0 ? 0 : x));
@@ -40,8 +40,7 @@ public class Player {
         int x = this.location.getX();
         int y = this.location.getY();
         String dir = direction.toUpperCase();
-
-        int gameSpace = globSet.SPACE_SIZE;
+        int gameSpace = GlobSettings.SPACE_SIZE;
 
         // Move logic
         if (dir.equals("N")) {
@@ -62,6 +61,10 @@ public class Player {
         }
 
         // Make sure the new location is within the range of map, namely[0,100]
+        if(x<0) x=0;
+        if(y<0) y=0;
+        if(x>gameSpace) x=gameSpace;
+        if(y>gameSpace) y=gameSpace;
         this.setLocation(x, y);
     } // end move
 

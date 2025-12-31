@@ -3,7 +3,7 @@ package game;
 // purp
 
 public enum Purpose {
-    AVOID,DECREASE,NO_AFFECT
+    HIDE,DECREASE,NO_AFFECT
 /*
    purpose : create enumator class for purpose
    AVOID       to avoid obstacle

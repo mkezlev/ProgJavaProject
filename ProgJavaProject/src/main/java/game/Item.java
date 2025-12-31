@@ -3,7 +3,7 @@ package game;
 // Item Class
 // Game items to hold item location and purpose
 public class Item {
-    GlobSettings globSet = new GlobSettings();
+
     private String name;
     private Purpose purpose;
     private Location location;
