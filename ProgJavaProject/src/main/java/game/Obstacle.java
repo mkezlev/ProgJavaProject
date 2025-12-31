@@ -15,14 +15,14 @@ Class Methods
     increaseSize
     decreaseSize
     placeObstacle
-    obcLocation
+    printLocation
     hitObstacle
  */
 
 public class Obstacle {
-    GlobSettings globSet = new GlobSettings();
+
     Location location;
-    int size = globSet.OBS_INITIAL_SIZE;
+    int size = GlobSettings.OBS_INITIAL_SIZE;
 
 
 
@@ -65,23 +65,19 @@ public class Obstacle {
     }
 
     /*
-       Place obstacle in game space where it does not contain
-       the given location. So that the player location is not
-       in the space covered by the obstacle
-       @Param loc
+       Place obstacle in game space
        #Return True if obstacle can be place in the game space
        #Retrun False if obstacle cannot be place in the game space
                in case size of obstacle is equal or bigger than gamespace
      */
-    public boolean placeObstacle(Location loc){
-        if (globSet.SPACE_SIZE-size <= 0) return false;
-        this.location.newLocation(globSet.SPACE_SIZE-size);
-        while(!hitObstacle(loc)) this.location.newLocation(globSet.SPACE_SIZE-size);
+    public boolean placeObstacle(){
+        if (GlobSettings.SPACE_SIZE-size <= 0) return false;
+        this.location.newLocation(GlobSettings.SPACE_SIZE-size);
         return true;
     }
 
     // print obstacle location
-    public void obsLocation(){
+    public void printLocation(){
         System.out.println(location.getX() + " " + location.getY());
     }
 

@@ -62,5 +62,5 @@ public class Inventory {
                 }
             }
         }
-    }
+    } // end listInventory
 }
