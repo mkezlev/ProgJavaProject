@@ -29,10 +29,11 @@ public class Game {
         System.out.println("There is a square obstacle on the game board which user must not hit");
         System.out.println("The square obstacle size increase after each successful task");
         System.out.println("The game ends when the player hits the square obstacle or the obstacle covers the whole game board");
-        System.out.println("User can use power of the collect item to hide the obstacle or decrease sise of obstacle");
+        System.out.printf("The player enter the direction and steps (0-%d) to move on the game board of size %dx%d\n", GlobSettings.SPACE_SIZE,GlobSettings.SPACE_SIZE,GlobSettings.SPACE_SIZE);
+        System.out.println("The player can use power of the collect item to hide the obstacle or decrease the size of obstacle");
         System.out.println("The user will collect one of the items:");
         for (int i = 0; i <= items.length; i++) {
-            System.out.printf("Item name %s with power %s",items[i].getName(),items[i].getPurpose().toString());
+            System.out.printf("Item name %s with power %s\n",items[i].getName(),items[i].getPurpose().toString());
         }
 
     }
