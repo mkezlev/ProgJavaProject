@@ -42,6 +42,7 @@ public class Game {
         for (int i = 0; i <items.length; i++) {
             System.out.printf("Item name %s with power %s\n",items[i].getName(),items[i].getPurpose().toString());
         }
+        System.out.println("Do not hit the obstacle, you can use the power of the items you collect");
 
     }
 
@@ -118,7 +119,6 @@ public class Game {
         System.out.printf("Your task is to collect %s at location x=%d , y=%d\n", item.getName(), item.getLocation().getX() , item.getLocation().getY());
         System.out.printf("You are at location at location x=%d , y=%d\n", player.getLocation().getX(), player.getLocation().getY());
         System.out.printf("There is a whole from x: %d to %d  and y: %d to %d\n", obsX,(obsX+obsSize) , obsY, (obsY+obsSize));
-        System.out.println("Do not hit the obstacle, you can use the power of the items you collect");
 
     } // end displayTask
 
@@ -160,28 +160,34 @@ public class Game {
     * @return The selected {@link Item}
     */
     public Item getItemFromPlayerInventory(){
-        List<Item> allItems = player.getInventory().getAllItemsAsList();
+        List<Item> currentInventory = player.getInventory().getAllItemsAsList();
 
-        if (allItems.isEmpty()) {
+        if (currentInventory.isEmpty()) {
             System.out.println("Your inventory is empty!");
             return null;
         }
 
         System.out.println("Inventory:");
-        for (int i = 0; i < allItems.size(); i++) {
-            System.out.printf("[" + (i + 1) + "] %s with power %s \n",allItems.get(i).getName(),allItems.get(i).getPurpose().toString());
+        for (int i = 0; i < currentInventory.size(); i++) {
+            System.out.printf("[" + (i + 1) + "] %s with power %s \n", currentInventory.get(i).getName(), currentInventory.get(i).getPurpose().toString());
         }
 
         UserInput input = new UserInput();
         int choice = input.constrainedInputInteger(
-                "Enter the number of the item (1-" + allItems.size() + "): ",
+                "Enter the number of the item (1-" + currentInventory.size() + ")to use item, or enter 0 to skip: ",
                 "Invalid selection",
-                0, allItems.size()+1);
+                0, currentInventory.size()+1);
 
-        Item selectedItem = allItems.get(choice - 1);
-        player.getInventory().removeFromInventory(selectedItem);
-
-        return selectedItem;
+        if (choice == 0) {
+            System.out.println("Skip using item.");
+            return null;
+        }
+        else if (choice > 0 && choice <= currentInventory.size()) {
+            Item selectedItem = currentInventory.get(choice - 1);
+            player.getInventory().removeFromInventory(selectedItem);
+            return selectedItem;
+        }
+        return null;
     }
 
 
@@ -219,6 +225,10 @@ public class Game {
         Item itemToCollect = setTask();
         displayGameObjective();
         while (itemToCollect !=null && !fallInObstacle) {
+            // Reset the status
+            onItemLocation = false;
+            canWalkOverObstacle = false;
+
             // display to player the new task
             displayTask(itemToCollect);
 
@@ -244,17 +254,25 @@ public class Game {
                 steps = getSteps();
                 player.move(direction, steps);
                 // if player has power to walk over obstacle do not check hit obstacle
-                if (!canWalkOverObstacle) fallInObstacle = obstacle.hitObstacle(player.getLocation());
+                if (!canWalkOverObstacle)
+                    fallInObstacle = obstacle.hitObstacle(player.getLocation());
                 // check the final place
-                if (itemLoc.compareTo((Comparable)player.getLocation()) == 0) onItemLocation = true;
+                if (itemLoc.compareTo((Comparable)player.getLocation()) == 0)
+                    onItemLocation = true;
                 displayTask(itemToCollect);
-            } // end get player command while loop
+            }
+            // end get player command while loop
+
             if (!fallInObstacle) {
                 player.pickItem(itemToCollect);
                 obstacle.increaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
                 itemToCollect = setTask();
-            } else System.out.println("Player fall in obstacle End of Game!");
-        } // end while loop
+            }
+            else
+                System.out.println("Player fall in obstacle End of Game!");
+        }
+        // end while loop
+
         if (!fallInObstacle) System.out.println("End of Game Obstacle covers all game space!");
 
     } // end play game
