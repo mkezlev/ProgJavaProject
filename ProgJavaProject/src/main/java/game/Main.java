@@ -5,6 +5,9 @@ package game;
 public class Main {
     public static void main(String[] args) {
 
+        Game game = new Game();
+        game.playGame();
+
 //        Location loc = new Location();
 //        UserInput userInput = new UserInput();
 //        Player player = new Player(loc);
@@ -75,5 +78,5 @@ public class Main {
         IO.println(map.get(Purpose.DECREASE));
         */
 
-    }
+    } // end main
 }

@@ -3,7 +3,7 @@ package game;
 import java.util.Random;
 // class Location
 // holds X,Y values for location
-public class Location {
+public class Location implements Comparable{
     private int x;
     private int y;
 
@@ -29,6 +29,12 @@ public class Location {
         this.x = getRandomNumber(size);
         this.y = getRandomNumber(size);
         return this;
+    }
+
+    public int compareTo (Object o){
+        Location loc = (Location)o;
+        if (this.x == loc.x && this.y == loc.y){ return 0;}
+        else return -1;
     }
 
 
