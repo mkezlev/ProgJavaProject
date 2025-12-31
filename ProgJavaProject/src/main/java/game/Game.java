@@ -71,7 +71,7 @@ public class Game {
      * Randomly picks one item from the item pool as the current game objective.
      * @return A randomly selected {@link Item}.
      */
-    public Item getItemForUserToCollect() {
+    public Item setItemForUserToCollect() {
         Random random = new Random();
         if (items == null || items.length == 0) {
             return null;
@@ -115,7 +115,7 @@ public class Game {
         int obsY = obstacle.getLocation().getY();
         int obsSize = obstacle.getSize();
 
-        System.out.printf("Your new task is to collect %s at location x=%d , y=%d\n", item.getName(), item.getLocation().getX() , item.getLocation().getY());
+        System.out.printf("Your task is to collect %s at location x=%d , y=%d\n", item.getName(), item.getLocation().getX() , item.getLocation().getY());
         System.out.printf("You are at location at location x=%d , y=%d\n", player.getLocation().getX(), player.getLocation().getY());
         System.out.printf("There is a whole from x: %d to %d  and y: %d to %d\n", obsX,(obsX+obsSize) , obsY, (obsY+obsSize));
         System.out.println("Do not hit the obstacle, you can use the power of the items you collect");
@@ -194,7 +194,7 @@ public class Game {
         if (setObstacleLocation()) {
             Item itemToCollect;
             // pick random item to pick by player
-            itemToCollect = getItemForUserToCollect();
+            itemToCollect = setItemForUserToCollect();
             // set player location
             setPlayerLocation();
             // set item location
@@ -222,9 +222,13 @@ public class Game {
             // display to player the new task
             displayTask(itemToCollect);
 
+            //  *****************for test adding code below
+            // player.pickItem(itemToCollect); // test line
+
             // if bag is not empty ask user if user wants to use power
-            if (player.getInventory()!=null) {
-                itemToUse = getItemFromPlayerInventory();
+            itemToUse = getItemFromPlayerInventory();
+
+            if (itemToUse !=null) {
                 if (itemToUse.getPurpose() == Purpose.HIDE)
                     canWalkOverObstacle = true;
                 else if (itemToUse.getPurpose() == Purpose.DECREASE)
@@ -243,6 +247,7 @@ public class Game {
                 if (!canWalkOverObstacle) fallInObstacle = obstacle.hitObstacle(player.getLocation());
                 // check the final place
                 if (itemLoc.compareTo((Comparable)player.getLocation()) == 0) onItemLocation = true;
+                displayTask(itemToCollect);
             } // end get player command while loop
             if (!fallInObstacle) {
                 player.pickItem(itemToCollect);
