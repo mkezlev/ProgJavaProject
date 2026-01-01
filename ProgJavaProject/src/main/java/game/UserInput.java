@@ -89,7 +89,7 @@ public class UserInput {
 */
     public int constrainedInputInteger (String userInfo, String errorInfo, int min, int max){
         int userInput= inputInteger(userInfo, errorInfo);
-        while (userInput<=min || userInput>=max){
+        while (userInput<min || userInput>max){
             userInput= inputInteger(userInfo, errorInfo);
         }
         return  userInput;
