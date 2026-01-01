@@ -22,14 +22,14 @@ Class Methods
 public class Obstacle {
 
     Location location;
-    int size = GlobSettings.OBS_INITIAL_SIZE;
+    int size;
 
 
 
 
     public Obstacle () {
         this.location = new Location();
-        this.size = size;
+        this.size = 0;
     }
 
     // getter and setter for location attribute

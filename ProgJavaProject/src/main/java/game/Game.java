@@ -115,11 +115,11 @@ public class Game {
         int obsX = obstacle.getLocation().getX();
         int obsY = obstacle.getLocation().getY();
         int obsSize = obstacle.getSize();
-
+        System.out.println("****************************");
         System.out.printf("Your task is to collect %s at location x=%d , y=%d\n", item.getName(), item.getLocation().getX() , item.getLocation().getY());
         System.out.printf("You are at location at location x=%d , y=%d\n", player.getLocation().getX(), player.getLocation().getY());
         System.out.printf("There is a whole from x: %d to %d  and y: %d to %d\n", obsX,(obsX+obsSize) , obsY, (obsY+obsSize));
-
+        System.out.println("****************************");
     } // end displayTask
 
     /**
@@ -196,6 +196,7 @@ public class Game {
     * @return The new target {@link Item} or null if no task can be set.
      */
     public Item setTask() {
+        obstacle.increaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
         // set obstacle location if obstacle can be placed in the game space
         if (setObstacleLocation()) {
             Item itemToCollect;
@@ -239,10 +240,15 @@ public class Game {
             itemToUse = getItemFromPlayerInventory();
 
             if (itemToUse !=null) {
-                if (itemToUse.getPurpose() == Purpose.HIDE)
+                if (itemToUse.getPurpose() == Purpose.HIDE) {
                     canWalkOverObstacle = true;
-                else if (itemToUse.getPurpose() == Purpose.DECREASE)
-                       obstacle.decreaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
+                    System.out.println("Player now has HIDE power and can walk thru obstacle!");
+                }
+                else if (itemToUse.getPurpose() == Purpose.DECREASE) {
+                    obstacle.decreaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
+                    System.out.println("Player used DECREASE power. Obstacle size is now:"+obstacle.getSize());
+                }
+
             }
 
             itemLoc = (Comparable) itemToCollect.getLocation();
@@ -259,13 +265,12 @@ public class Game {
                 // check the final place
                 if (itemLoc.compareTo((Comparable)player.getLocation()) == 0)
                     onItemLocation = true;
-                displayTask(itemToCollect);
+
             }
             // end get player command while loop
 
             if (!fallInObstacle) {
                 player.pickItem(itemToCollect);
-                obstacle.increaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
                 itemToCollect = setTask();
             }
             else
@@ -276,6 +281,99 @@ public class Game {
         if (!fallInObstacle) System.out.println("End of Game Obstacle covers all game space!");
 
     } // end play game
+
+
+    public void testGame() {
+        boolean canWalkOverObstacle = false;
+        boolean onItemLocation = false;
+        boolean fallInObstacle  = false;
+        String direction="";
+        int steps = 0;
+        Comparable itemLoc;
+        Item itemToUse;
+        Item itemToCollect = setTask();
+        displayGameObjective();
+        int count =0;
+        while (itemToCollect !=null && !fallInObstacle) {
+            // Reset the status
+            onItemLocation = false;
+            canWalkOverObstacle = false;
+
+            System.out.println("The task iterate :" + ++count);
+            System.out.println("OBS Size at start of task:"+obstacle.getSize());
+            // display to player the new task
+            displayTask(itemToCollect);
+
+
+            // if bag is not empty ask user if user wants to use power
+            itemToUse = getItemFromPlayerInventory();
+
+
+            if (itemToUse !=null) {
+                if (itemToUse.getPurpose() == Purpose.HIDE){
+                    canWalkOverObstacle = true;
+                    System.out.println("Player now has HIDE power");
+                }
+                else if (itemToUse.getPurpose() == Purpose.DECREASE)
+                {
+                    obstacle.decreaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
+                    System.out.println("OBS Size after decrease:"+obstacle.getSize());
+                }
+            }
+
+            itemLoc = (Comparable) itemToCollect.getLocation();
+            // get player command until player hits obstacle
+            // or reach item
+            while (!onItemLocation && !fallInObstacle) {
+                // get the direction & steps
+
+                // **********
+
+
+                System.out.println("Enter Steps to test one of the following");
+                System.out.println("1 player on item collect loc");
+                System.out.println("2 player on obstacle");
+            //    System.out.println("3 player on obstacle with hide");
+            //    System.out.println("4 on item to collect with with decrease");
+                steps = getSteps();
+                  if (steps == 1 ) player.setLocation(itemToCollect.getLocation());
+                  if (steps == 2)  {
+                      player.setLocation(obstacle.getLocation());
+
+                  }
+                  if (steps == 3) {
+                      player.setLocation(obstacle.getLocation());
+                  }
+                  if (steps == 4) {
+                      player.setLocation(itemToCollect.getLocation());
+                      obstacle.decreaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
+                      System.out.println("OBS Size after decrease:"+obstacle.getSize());
+                  }
+
+                // ************
+
+                // if player has power to walk over obstacle do not check hit obstacle
+                if (!canWalkOverObstacle)
+                    fallInObstacle = obstacle.hitObstacle(player.getLocation());
+                // check the final place
+                if (itemLoc.compareTo((Comparable)player.getLocation()) == 0)
+                    onItemLocation = true;
+                //displayTask(itemToCollect);
+            }
+            // end get player command while loop
+
+            if (!fallInObstacle) {
+                player.pickItem(itemToCollect);
+                itemToCollect = setTask();
+            }
+            else
+                System.out.println("Player fall in obstacle End of Game!");
+        }
+        // end while loop
+
+        if (!fallInObstacle) System.out.println("End of Game Obstacle covers all game space!");
+
+    } // end test game
 
 } // end class Game
 
