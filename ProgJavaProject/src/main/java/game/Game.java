@@ -434,12 +434,19 @@ public class Game {
                 player.pickItem(itemToCollect);
                 itemToCollect = setTask();
             }
-            else
-                System.out.println("Player fall in obstacle End of Game!");
+            else {
+                System.out.println("*************************************************");
+                System.out.println("******Player fall in obstacle End of Game!*******");
+                System.out.println("*************************************************");
+            }
         }
         // end while loop
 
-        if (!fallInObstacle) System.out.println("End of Game Obstacle covers all game space!");
+        if (!fallInObstacle) {
+            System.out.println("*********************************************************");
+            System.out.println("******End of Game Obstacle covers all game space!********");
+            System.out.println("*********************************************************");
+        }
 
     } // end test game
 
