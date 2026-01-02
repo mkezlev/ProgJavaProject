@@ -1,5 +1,19 @@
 package game;
-// class Player
+/*
+Author Kangqi Tuo
+ class Player
+
+ Attributes
+ location
+ inventory
+
+ Methods
+ getLocation
+ setLocation
+ getInventory
+ move
+ setLocationAfterMove
+ */
 
 
 public class Player {
@@ -25,17 +39,8 @@ public class Player {
 
     public void setLocation(Location location) { this.location = location; }
 
-    public void setLocation(int x, int y) {
-        int gameSpace = GlobSettings.SPACE_SIZE;
-
-        // If the location > gameSpace, take gameSpace; Else if location<0, take 0; Else take X or Y
-        this.location.setX(x>gameSpace?gameSpace:(x < 0 ? 0 : x));
-        this.location.setY(y>gameSpace?gameSpace:(y < 0 ? 0 : y));
-    }
-
     public Inventory getInventory() { return inventory; }
 
-    public void setInventory(Inventory inventory) { this.inventory = inventory; }
 
     /**
      * Updates the player's location.
@@ -68,11 +73,7 @@ public class Player {
         }
 
         // Make sure the new location is within the range of map, namely[0,100]
-        if(x<0) x=0;
-        if(y<0) y=0;
-        if(x>gameSpace) x=gameSpace;
-        if(y>gameSpace) y=gameSpace;
-        this.setLocation(x, y);
+        this.setLocationAfterMove(x, y);
     } // end move
 
     /**
@@ -83,16 +84,15 @@ public class Player {
         inventory.addToInventory(item);
     }
 
-    /**
-     * Removes an item from the inventory after it has been used.
-     * @param item The item to be used.
-     */
-    public void useItem(Item item) {
-        if (inventory != null&& item != null) {
-            inventory.removeFromInventory(item);
-        }
-        else  {
-            System.out.println("Inventory is empty or item is invalid.");
-        }
+
+    /*
+ set location of player using x,y coordinates and check new location after move
+ is always within the range of the game space
+  */
+    private void setLocationAfterMove(int x, int y) {
+        int gameSpace = GlobSettings.SPACE_SIZE;
+        // If the location > gameSpace, take gameSpace; Else if location<0, take 0; Else take X or Y
+        this.location.setX(x>gameSpace?gameSpace:(x < 0 ? 0 : x));
+        this.location.setY(y>gameSpace?gameSpace:(y < 0 ? 0 : y));
     }
 }

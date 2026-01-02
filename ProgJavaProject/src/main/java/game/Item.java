@@ -1,7 +1,23 @@
 package game;
 
-// Item Class
-// Game items to hold item location and purpose
+/*
+Author Kangqi Tuo
+ Item Class
+ Game items to hold item location and purpose
+
+ Attributes
+name;
+purpose;
+location;
+
+Methods
+getPurpose
+setPurpose
+getLocation
+placeItem
+getName
+ */
+
 public class Item {
 
     private String name;

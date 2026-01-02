@@ -1,8 +1,23 @@
 package game;
 
 import java.util.Random;
-// class Location
-// holds X,Y values for location
+/*
+Author Murat Kezlev
+class Location
+holds X,Y values for location
+Attribues
+x
+y
+
+Methods
+getX / setX
+getY / setY
+newLocation
+compareTo
+getRandomNumber
+
+ */
+
 public class Location implements Comparable{
     private int x;
     private int y;
@@ -10,6 +25,11 @@ public class Location implements Comparable{
     public Location() {
     }
 
+    public int compareTo (Object o){
+        Location loc = (Location)o;
+        if (this.x == loc.x && this.y == loc.y){ return 0;}
+        else return -1;
+    }
 
     // getter and setter for x attribute
     public int getX(){ return this.x; }
@@ -31,32 +51,6 @@ public class Location implements Comparable{
         return this;
     }
 
-    public int compareTo (Object o){
-        Location loc = (Location)o;
-        if (this.x == loc.x && this.y == loc.y){ return 0;}
-        else return -1;
-    }
-
-
-    /**
-     * Set new location x,y values.
-     * Location method overload to ensure new location is different from the given location
-     * @param size
-     * @param loc
-     */
-    public Location newLocation(int size, Location loc){
-        this.x = getRandomNumber(size);
-        int locx=loc.getX();
-        int locy=loc.getY();
-        while (this.x == locx){
-            this.x = getRandomNumber(size);
-        }
-        this.y = getRandomNumber(size);
-        while (this.y == locy){
-            this.y = getRandomNumber(size);
-        }
-        return this;
-    }
 
     /**
      * Generate a random integer number in range 0-space

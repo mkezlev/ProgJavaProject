@@ -3,12 +3,14 @@ package game;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-// class UserInput
-// methods
-//  inputString
-//  lengthConstrainedInputString
-//  inputInteger
-//  constrainedInputInteger
+/*
+ class UserInput
+ methods
+  inputString
+  lengthConstrainedInputString
+  inputInteger
+  constrainedInputInteger
+*/
 
 public class UserInput {
     private Scanner myScanner = new Scanner(System.in);

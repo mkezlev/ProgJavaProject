@@ -1,6 +1,7 @@
 package game;
 
 /*
+Author Murat Kezlev
 Class Obstacle
 Class attributes
   Location
@@ -15,7 +16,6 @@ Class Methods
     increaseSize
     decreaseSize
     placeObstacle
-    printLocation
     hitObstacle
  */
 
@@ -70,11 +70,6 @@ public class Obstacle {
         if (GlobSettings.SPACE_SIZE-size <= 0) return false;
         this.location.newLocation(GlobSettings.SPACE_SIZE-size);
         return true;
-    }
-
-    // print obstacle location
-    public void printLocation(){
-        System.out.println(location.getX() + " " + location.getY());
     }
 
     /**

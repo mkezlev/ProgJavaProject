@@ -4,6 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/*
+Author Kangqi Tuo
+ Class Inventory
+  Hold items player collects
+
+ Attributes
+ bag (hashmap)
+
+ methods
+ addToInventory
+ removeFromInventory
+ getAllItemsAsList
+
+ */
 public class Inventory {
 
     private HashMap<Purpose, List<Item>> bag;
