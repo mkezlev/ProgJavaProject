@@ -1,6 +1,7 @@
 package game;
 // class Player
-//
+
+
 public class Player {
 
     Location location;
@@ -36,6 +37,12 @@ public class Player {
 
     public void setInventory(Inventory inventory) { this.inventory = inventory; }
 
+    /**
+     * Updates the player's location.
+     * Prevents the player from moving outside the game boundaries.
+     * @param direction "N", "S", "E", "W"
+     * @param steps Number of units to move.
+     */
     public void move(String direction, int steps) {
         int x = this.location.getX();
         int y = this.location.getY();
@@ -68,10 +75,18 @@ public class Player {
         this.setLocation(x, y);
     } // end move
 
+    /**
+     * Adds the item to the inventory.
+     * @param item
+     */
     public void pickItem(Item item) {
         inventory.addToInventory(item);
     }
 
+    /**
+     * Removes an item from the inventory after it has been used.
+     * @param item The item to be used.
+     */
     public void useItem(Item item) {
         if (inventory != null&& item != null) {
             inventory.removeFromInventory(item);

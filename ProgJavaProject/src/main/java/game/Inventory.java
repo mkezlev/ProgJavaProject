@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Class Inventory
- * Holds the items player posses
- */
 public class Inventory {
 
     private HashMap<Purpose, List<Item>> bag;
@@ -22,7 +18,7 @@ public class Inventory {
 
     /**
      * Adds an item to the inventory and categorizes it based on its purpose.
-     * @param item The {@link Item} to be added to the player's inventory.
+     * @param item The item to be added to the inventory.
      */
     public void addToInventory(Item item) {
         if (item == null) {
@@ -34,7 +30,7 @@ public class Inventory {
 
     /**
      * Removes an item from the inventory if it exists within its category.
-     * @param item The {@link Item} to be removed from the bag.
+     * @param item The item to be removed from the bag.
      */
     public void removeFromInventory(Item item) {
         if (item == null) {
@@ -49,26 +45,8 @@ public class Inventory {
     }
 
     /**
-     * Displays a list with index of all items currently in the inventory
-     */
-    public void listInventory() {
-        System.out.println("Current Inventory:");
-        int count = 1;
-        for (Purpose purpose : Purpose.values()) {
-            List<Item> items = bag.get(purpose);
-            if (!items.isEmpty()) {
-                System.out.println("[" + purpose + "]");
-                for (Item item : items) {
-                    System.out.println(count + ". " + item.getName());
-                    count++;
-                }
-            }
-        }
-    } // end listInventory
-
-    /**
      * Extract all items of all purposes in the inventory and gather them into one single Arraylist
-     * @return A {@link List} containing all {@link Item}.
+     * @return A list containing all items.
      */
     public List<Item> getAllItemsAsList() {
         List<Item> allItems = new ArrayList<>();

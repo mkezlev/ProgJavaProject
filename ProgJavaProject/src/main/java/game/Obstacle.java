@@ -24,9 +24,6 @@ public class Obstacle {
     Location location;
     int size;
 
-
-
-
     public Obstacle () {
         this.location = new Location();
         this.size = 0;
@@ -47,28 +44,27 @@ public class Obstacle {
         this.size = size;
     }
 
-    /** method increase size
-     @Param increment
-     change obstacle size by +increment
+    /**
+     * change obstacle size by +increment
+     * @param increment size to be increased
      */
     public void increaseSize(int increment) {
         size +=increment;
     }
 
-    /* method decrease size
-     @Param decrement
-     change obstacle size by -decrement
+    /**
+     * change obstacle size by -decrement
+     * @param decrement size to be decreased
      */
-
     public void decreaseSize(int decrement) {
         size -=decrement;
     }
 
-    /*
-       Place obstacle in game space
-       #Return True if obstacle can be place in the game space
-       #Retrun False if obstacle cannot be place in the game space
-               in case size of obstacle is equal or bigger than gamespace
+    /**
+     * Place obstacle in game space
+     * @return True if obstacle can be place in the game space
+        False if obstacle cannot be place in the game space in
+        case size of obstacle is equal or bigger than gamespace
      */
     public boolean placeObstacle(){
         if (GlobSettings.SPACE_SIZE-size <= 0) return false;
@@ -81,10 +77,10 @@ public class Obstacle {
         System.out.println(location.getX() + " " + location.getY());
     }
 
-    /*
-    this method check if the give location is in the area covered by the obstacle
-    @Param location
-    #Return True if given location is in the area of obstacle covering
+    /**
+     * check if the given location is in the area covered by the obstacle
+     * @param location
+     * @return True if given location is in the area of obstacle covering
      */
     public boolean hitObstacle(Location location) {
 
