@@ -230,8 +230,9 @@ public class Game {
             // get move action from the player and let use items in the player inventory
             // Runs all the time until item is collected or player hits an obstacle
             while (!onItemLocation && !fallInObstacle) {
-
-                do{
+                // ask player which item to use as long as there is item in the inventory 
+                // or user chooses not to use an item
+                do{ 
                     displayTask(itemToCollect);
                     itemToUse = getItemFromPlayerInventory();
                     if (itemToUse == null) {
@@ -257,27 +258,27 @@ public class Game {
                 steps = getSteps();
                 player.move(direction, steps);
 
-
-                if (!canWalkOverObstacle) {
+                // if player can walk over obstacle skip the hit obstachle check
+                if (!canWalkOverObstacle) {  
                     fallInObstacle = obstacle.hitObstacle(player.getLocation());
                 }
 
-
+                // check if the player is on the item to collect coordinates
                 if (itemToCollect.getLocation().compareTo(player.getLocation()) == 0) {
                     onItemLocation = true;
                 }
 
-            } // End while (!onItemLocation && !fallInObstacle)
+            } // End while (!onItemLocation && !fallInObstacle) for player actions
 
-            if (!fallInObstacle) {
+            if (!fallInObstacle) { // the action loop ended with plauer on otem location
                 player.pickItem(itemToCollect);
                 itemToCollect = setTask();
-            } else {
+            } else { // the action loop ended with player hit the wall
                 System.out.println("Player fall in obstacle. End of Game!");
             }
         }
 
-        if (!fallInObstacle) {
+        if (!fallInObstacle) { // game loop exit becasue new task cannot be assigned
             System.out.println("End of Game Obstacle covers all game space!");
         }
     } // end play game
