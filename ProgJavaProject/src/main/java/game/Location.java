@@ -38,11 +38,11 @@ public class Location implements Comparable{
     }
 
 
-    /*
-       set new location x,y values
-       location method overload to ensure new location is different than given location
-       @Param size
-       @Param loc
+    /**
+     * Set new location x,y values.
+     * Location method overload to ensure new location is different from the given location
+     * @param size
+     * @param loc
      */
     public Location newLocation(int size, Location loc){
         this.x = getRandomNumber(size);
@@ -58,7 +58,11 @@ public class Location implements Comparable{
         return this;
     }
 
-    // generate random integer number in range 0-space
+    /**
+     * Generate a random integer number in range 0-space
+     * @param space
+     * @return a random integer number in range 0-space
+     */
     private int getRandomNumber(int space) {
         Random rand = new Random();
         int randomNumber = rand.nextInt(space+1);
