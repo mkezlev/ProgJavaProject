@@ -1,11 +1,11 @@
 ﻿Programming in Java Final Project
 
- The purpose of the text game is to collect items gave will randomly place
+ The purpose of the text game is to collect items game will randomly place
  In the given space there is an obstactle which the player shold avoid to cross.
  Crossing the obstacle ends the game.
- End of each task the game increases obstacle size  and evantually the user will cross the obstacle (like the snake grows in snake game)
+ EEnd of each task the game increases obstacle size. Evantually obstacle cover the whole game space and the user will cross the obstacle (like the snake grows in snake game)
  Each item has a purpose to use
- * Avoid: Enables the user to cross the obstacle
+ * Hide: Enables the user to cross the obstacle
  * Decrease : Decrease the obstacle size
 
 User pick the item to add the inventory bag
