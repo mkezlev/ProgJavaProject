@@ -5,6 +5,26 @@ import java.util.Random;
 
 /**
  * Manages game logic, player actions, obstacles, and item collection tasks.
+ *
+ * Attributes
+ * player
+ * items
+ * obstacle
+ * gameSpase
+ *
+ *
+ * Methods
+ *displayGameObjective()
+ * setObstacleLocation()
+ * setPlayerLocation()
+ * setItemForUserToCollect()
+ * setItemLocation(Item item)
+ * displayTask(Item item)
+ * getDirection()
+ * getSteps()
+ * getItemFromPlayerInventory()
+ * setTask()
+ * playGame()
  */
 public class Game {
 
