@@ -53,12 +53,12 @@ public class Game {
      * Displays game rules, objectives, and available items.
      */
     private void displayGameObjective(){
-        System.out.println("Game Goal: Reach the item's coordinates to collect it.");
+        System.out.println("Game Goal: Reach the item coordinates to collect the item.");
         System.out.println("Avoid: Do NOT hit the square Hole(Obstacle).");
-        System.out.println("The obstacle size grows after each success.");
+        System.out.println("The obstacle size grows after each successful task.");
         System.out.println("The game ends when the player hits the square obstacle or the obstacle covers the hole game board");
         System.out.printf("Enter direction and steps (0-%d) to move on the game board of size %dx%d\n", GlobSettings.SPACE_SIZE,GlobSettings.SPACE_SIZE,GlobSettings.SPACE_SIZE);
-        System.out.println("The user will collect items for 3 purposes:DECREASE,HIDE and No AFFECT, and use them to hide or decrease the size of obstacle");
+        System.out.println("The user will collect items for 3 purposes:DECREASE,HIDE and No AFFECT, and use them to hide the obstacle or decrease the size of the obstacle");
     }
 
     /**
@@ -135,11 +135,12 @@ public class Game {
         int obsSize = obstacle.getSize();
         System.out.println("---------------------------------------------------------");
         System.out.printf("Task: collect %s at location x=%d , y=%d\n", item.getName(), item.getLocation().getX() , item.getLocation().getY());
-        System.out.printf("You are at location x=%d , y=%d\n", player.getLocation().getX(), player.getLocation().getY());
         System.out.printf("There is a hole from x:[%d to %d], y:[%d to %d]\n", obsX,(obsX+obsSize) , obsY, (obsY+obsSize));
+        System.out.printf("You are at location x=%d , y=%d\n", player.getLocation().getX(), player.getLocation().getY());
     } // end displayTask
 
     /**
+     *
     * Get direction to move
     * @return direction
     */
@@ -209,22 +210,23 @@ public class Game {
 
 
     /**
+     * Author Murat Kezlev
     * Set task
     * @return The new target {@link Item} or null if no task can be set.
      */
     private Item setTask() {
         obstacle.increaseSize(GlobSettings.OBSTACLE_SIZE_CHANGE);
+        Item itemToCollect = null;
         // set obstacle location if obstacle can be placed in the game space
         if (setObstacleLocation()) {
-            Item itemToCollect;
             // pick random item to pick by player
             itemToCollect = setItemForUserToCollect();
             // set player location
             setPlayerLocation();
             // set item location
             setItemLocation(itemToCollect);
-            return itemToCollect;
-        } else return null;
+        }
+        return itemToCollect;
 
     } // end set task
 
@@ -239,6 +241,7 @@ public class Game {
         Item itemToUse;
         int steps;
         String direction;
+        int taskCount=0;
 
         Item itemToCollect = setTask();
         displayGameObjective();
@@ -246,6 +249,7 @@ public class Game {
         while (itemToCollect != null && !fallInObstacle) {
             onItemLocation = false;
             canWalkOverObstacle = false;
+
 
             // get move action from the player and let use items in the player inventory
             // Runs all the time until item is collected or player hits an obstacle
@@ -292,17 +296,18 @@ public class Game {
             if (!fallInObstacle) {
                 player.pickItem(itemToCollect);
                 itemToCollect = setTask();
+                taskCount=taskCount+1;
             } else {
                 System.out.println("*************************************************");
-                System.out.println("******Player fall in obstacle End of Game!*******");
-                System.out.println("*************************************************");
+                System.out.println("****  Player fall in obstacle End of Game!  *****");
+                System.out.printf( "****  You completed %d tasks                ******",taskCount);
            }
         }
 
         if (!fallInObstacle) {
             System.out.println("*********************************************************");
-            System.out.println("******End of Game Obstacle covers all game space!********");
-            System.out.println("*********************************************************");
+            System.out.println("****  End of Game Obstacle covers all game space!  ******");
+            System.out.printf( "****  You completed %d  tasks                      ******",taskCount);
         }
     } // end play game
 
@@ -381,6 +386,7 @@ public class Game {
         Item itemToUse;
         int steps;
         String direction;
+        int taskCount=0;
 
         Item itemToCollect = setTask();
         displayGameObjective();
@@ -388,6 +394,7 @@ public class Game {
         while (itemToCollect != null && !fallInObstacle) {
             onItemLocation = false;
             canWalkOverObstacle = false;
+
 
             // get move action from the player and let use items in the player inventory
             // Runs all the time until item is collected or player hits an obstacle
@@ -441,18 +448,18 @@ public class Game {
             if (!fallInObstacle) {
                 player.pickItem(itemToCollect);
                 itemToCollect = setTask();
+                taskCount=taskCount+1;
             } else {
                 System.out.println("*************************************************");
-                System.out.println("******Player fall in obstacle End of Game!*******");
-                System.out.println("*************************************************");
-
+                System.out.println("****  Player fall in obstacle End of Game!  *****");
+                System.out.printf( "****  You completed %d  tasks               ******",taskCount);
             }
         }
 
         if (!fallInObstacle) {
             System.out.println("*********************************************************");
-            System.out.println("******End of Game Obstacle covers all game space!********");
-            System.out.println("*********************************************************");
+            System.out.println("****  End of Game Obstacle covers all game space!  ******");
+            System.out.printf( "****  You completed %d  tasks                      ******",taskCount);
         }
     } // end test game
 
