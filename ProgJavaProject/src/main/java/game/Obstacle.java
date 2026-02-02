@@ -21,8 +21,8 @@ Class Methods
 
 public class Obstacle {
 
-    Location location;
-    int size;
+    private Location location;
+    private int size;
 
     public Obstacle () {
         this.location = new Location();

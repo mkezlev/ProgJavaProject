@@ -18,15 +18,15 @@ getRandomNumber
 
  */
 
-public class Location implements Comparable{
+public class Location implements Comparable <Location>{
     private int x;
     private int y;
 
     public Location() {
     }
 
-    public int compareTo (Object o){
-        Location loc = (Location)o;
+    @Override
+    public int compareTo (Location loc){
         if (this.x == loc.x && this.y == loc.y){ return 0;}
         else return -1;
     }
