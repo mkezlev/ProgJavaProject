@@ -111,7 +111,7 @@ public class Game {
         Location loc = new Location();
         loc.newLocation(gameSpace);
         Comparable cLoc = (Comparable)loc;
-        Comparable playerLoc = (Comparable)player.location;
+        Comparable playerLoc = (Comparable)player.getLocation();
 
         // place item in a coordinate different from player
         // and outside obstacle

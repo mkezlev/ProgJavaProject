@@ -18,8 +18,8 @@ Author Kangqi Tuo
 
 public class Player {
 
-    Location location;
-    Inventory inventory;
+    private Location location;
+    private Inventory inventory;
 
     public Player() {
         this.location = new Location();
